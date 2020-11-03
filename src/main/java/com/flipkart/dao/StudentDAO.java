@@ -5,6 +5,7 @@ import com.flipkart.bean.Student;
 import com.flipkart.exception.CourseNotFoundException;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,7 +18,7 @@ public interface StudentDAO {
      * @param student the student
      * @return the array list
      */
-    ArrayList<Course> viewRegisteredCourses(Student student);
+    List<Course> viewRegisteredCourses(Student student);
 
     /**
      * Select course.

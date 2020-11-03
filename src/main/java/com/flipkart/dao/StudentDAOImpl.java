@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
 
@@ -34,8 +35,8 @@ public class StudentDAOImpl implements StudentDAO {
      * returns a list of courses registered by a student
      */
     @Override
-    public ArrayList<Course> viewRegisteredCourses(Student student) {
-        ArrayList<Course> courseList = new ArrayList<Course>();
+    public List<Course> viewRegisteredCourses(Student student) {
+        List<Course> courseList = new ArrayList<Course>();
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(SQLQueriesConstants.GET_REGISTERED_COURSES_QUERY);

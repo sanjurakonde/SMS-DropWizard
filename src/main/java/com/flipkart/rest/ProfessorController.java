@@ -4,6 +4,7 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.service.*;
+import org.apache.log4j.Logger;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,6 +15,7 @@ import java.util.List;
 @Path("/professor")
 public class ProfessorController {
 
+    private static final Logger logger = Logger.getLogger(ProfessorController.class);
     ProfessorService professorService = new ProfessorServiceImpl();
 
     // register professor
@@ -29,6 +31,7 @@ public class ProfessorController {
         professor.setUserName(username);
         professor.setGender(gender);
         authenticate.registerProfessor(professor, password);
+        logger.info("Professor is registered with username " + username);
         return Response.status(201).entity("User with username " + username + " is successfully registered").build();
     }
 
@@ -46,6 +49,7 @@ public class ProfessorController {
     @GET
     @Path("/viewStudentsTaught/{professorId}")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes("application/json")
     public List<Student> viewStudents(@PathParam("professorId") int professorId)
     {
         Professor professor = new Professor();
@@ -54,17 +58,18 @@ public class ProfessorController {
     }
 
     // grade the students
-    @POST
+    @PUT
     @Path("gradeStudent/{professorId}/{studentId}/{courseId}/{grade}")
     @Consumes("application/json")
-    @Produces(MediaType.APPLICATION_JSON)
+    //@Produces(MediaType.APPLICATION_JSON)
     public Response gradeStudent(@PathParam("professorId") int professorId, @PathParam("studentId") int studentId,
                                  @PathParam("courseId") int courseId, @PathParam("grade") String grade) {
         Professor professor = new Professor();
         professor.setProfessorId(professorId);
         professorService.gradeStudent(professor, courseId, studentId, grade);
         String result = "Grades for student Id " + studentId + " with course " + courseId + "updated with grade " + grade;
-        return Response.status(201).entity(result).build();
+        logger.info(result);
+        return Response.status(200).entity(result).build();
     }
 
 

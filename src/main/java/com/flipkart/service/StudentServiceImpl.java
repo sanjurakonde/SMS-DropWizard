@@ -6,7 +6,8 @@ import com.flipkart.dao.StudentDAO;
 import com.flipkart.dao.StudentDAOImpl;
 import com.flipkart.exception.CourseNotFoundException;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.log4j.Logger;;
 
 /**
@@ -19,8 +20,8 @@ public class StudentServiceImpl implements StudentService {
      */
     StudentDAO studentDAO = new StudentDAOImpl();
     @Override
-    public ArrayList<Course> viewRegisteredCourses(Student student) {
-        ArrayList<Course> courseList = studentDAO.viewRegisteredCourses(student);
+    public List<Course> viewRegisteredCourses(Student student) {
+        List<Course> courseList = studentDAO.viewRegisteredCourses(student);
         if(courseList.size() == 0) {
             logger.info("No registered courses");
         }

@@ -4,7 +4,7 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Student;
 import com.flipkart.exception.CourseNotFoundException;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The interface Student service.
@@ -16,7 +16,7 @@ public interface StudentService {
      * @param student the student
      * @return
      */
-    ArrayList<Course> viewRegisteredCourses(Student student);
+    List<Course> viewRegisteredCourses(Student student);
 
     /**
      * Select course.
